@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>CREATE KTP FAKE BY DREAM STALKER</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f1f5f9;
+      margin: 0;
+      padding: 30px 15px;
+      color: #1f2937;
+    }
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background: #ffffff;
+      margin: auto;
+      padding: 25px 20px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      box-sizing: border-box;
+    }
+    h1 {
+      text-align: center;
+      color: #2563eb;
+      margin-bottom: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      resize: vertical;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+    .contoh-box {
+      background-color: #f9fafb;
+      border-left: 4px solid #2563eb;
+      padding: 8px 12px;
+      font-size: 0.72rem;
+      color: #374151;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      word-break: break-word;
+    }
+    .contoh-box code {
+      color: #2563eb;
+      cursor: pointer;
+    }
+    button {
+      width: 100%;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #1e40af;
+    }
+    #result {
+      margin-top: 25px;
+      font-size: 0.9rem;
+      display: none;
+    }
+    #result img {
+      margin-top: 10px;
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    footer a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Fake KTP Generator</h1>
+    <form id="ktpForm">
+      <textarea id="dataInput" placeholder="Masukkan data Sesuai Contoh"></textarea>
+      <div class="contoh-box" id="contohBox">
+        Contoh penggunaan (klik untuk mengisi):<br>
+        <code id="isiContoh">JEPANG|TOKYO|327XXXXXXXXXXXXX|Hanako|JEPANG,07-12-2007|LAKI-LAKI|A|JL. TOKYO NO. 123|05/08|OKINAWA|EDITOR|ISLAM|BELUM MENIKAH|NGEDIT|WNI|SEUMUR HIDUP|25-09-2023|https://qu.ax/PfBXJ.jpg</code>
+      </div>
+      <button type="submit">Create KTP</button>
+    </form>
+    <div id="result"></div>
+  </div>
+  <footer>
+    Copyright © <strong>BY</strong><br><a href="https://wa.me/6285789202053" target="_blank">DREAM STALKER</a>
+  </footer>
+  <script>
+    document.getElementById('isiContoh').addEventListener('click', () => {
+      const contoh = `JEPANG|TOKYO|327XXXXXXXXXXXXX|Hanako|JEPANG,07-12-2007|LAKI-LAKI|A|JL. TOKYO NO. 123|05/08|OKINAWA|EDITOR|ISLAM|BELUM MENIKAH|NGEDIT|WNI|SEUMUR HIDUP|25-09-2023|https://qu.ax/PfBXJ.jpg`;
+      document.getElementById('dataInput').value = contoh;
+    });
+    document.getElementById('ktpForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const input = document.getElementById('dataInput').value.trim();
+      const result = document.getElementById('result');
+      const contohBox = document.getElementById('contohBox');
+      result.style.display = 'none';
+      const fields = input.split('|');
+      if (fields.length !== 18) {
+        result.innerHTML = '<p style="color:red;">Masukkan tepat 18 parameter dipisahkan oleh "|"</p>';
+        result.style.display = 'block';
+        return;
+      }
+      const [
+        provinsi, kota, nik, nama, ttl, jk, goldar, alamat, rtRw, kelDesa,
+        kecamatan, agama, status, pekerjaan, kewarganegaraan, masaBerlaku, terbuat, pasPhoto
+      ] = fields.map(f => f.trim());
+      const apiUrl = `https://fastrestapis.fasturl.cloud/maker/ktp?provinsi=${encodeURIComponent(provinsi)}&kota=${encodeURIComponent(kota)}&nik=${encodeURIComponent(nik)}&nama=${encodeURIComponent(nama)}&ttl=${encodeURIComponent(ttl)}&jenisKelamin=${encodeURIComponent(jk)}&golonganDarah=${encodeURIComponent(goldar)}&alamat=${encodeURIComponent(alamat)}&rtRw=${encodeURIComponent(rtRw)}&kelDesa=${encodeURIComponent(kelDesa)}&kecamatan=${encodeURIComponent(kecamatan)}&agama=${encodeURIComponent(agama)}&status=${encodeURIComponent(status)}&pekerjaan=${encodeURIComponent(pekerjaan)}&kewarganegaraan=${encodeURIComponent(kewarganegaraan)}&masaBerlaku=${encodeURIComponent(masaBerlaku)}&terbuat=${encodeURIComponent(terbuat)}&pasPhoto=${encodeURIComponent(pasPhoto)}`;
+      result.innerHTML = '<p style="color:gray;">Memuat KTP...</p>';
+      result.style.display = 'block';
+      contohBox.style.display = 'none';
+      const img = new Image();
+      img.src = apiUrl;
+      img.alt = "KTP";
+      img.onload = () => {
+        result.innerHTML = `<strong>✅ KTP Berhasil Dibuat</strong><br><br>`;
+        result.appendChild(img);
+      };
+      img.onerror = () => {
+        result.innerHTML = '<p style="color:red;">Gagal memuat gambar KTP. Cek kembali data yang dimasukkan.</p>';
+      };
+    });
+  </script>
+</body>
+</html>
